@@ -1,4 +1,5 @@
-### Getting started
+### Note the code does not run due to segmentation fault. However all of the functions are implemented
+Getting started
 There are various things you can do to quickly and efficiently configure your Codio Box to your exact requirements. 
 
 ### GUI Applications and the Virtual Desktop 
