@@ -66,12 +66,12 @@ void CloseRestaurant(BENSCHILLIBOWL* bcb) {
 /* add an order to the back of queue */
 int AddOrder(BENSCHILLIBOWL* bcb, Order* order) {
      pthread_mutex_lock((&bcb->mutex));
-    // while(IsFull(bcb) == true){
-    //   pthread_cond_wait(&(bcb->can_add_orders), &(bcb->mutex));
-    // }
-    // order->order_number = bcb->next_order_number;
-    // AddOrderToBack(&(bcb->orders),order);
-    // return order->order_number;    
+    while(IsFull(bcb) == true){
+      pthread_cond_wait(&(bcb->can_add_orders), &(bcb->mutex));
+    }
+    order->order_number = bcb->next_order_number;
+    AddOrderToBack(&(bcb->orders),order);
+    return order->order_number;    
 }
 
 /* remove an order from the queue */
@@ -115,18 +115,18 @@ bool IsFull(BENSCHILLIBOWL* bcb) {
 
 /* this methods adds order to rear of queue */
 void AddOrderToBack(Order **orders, Order *order) {
-  // Order * current = *orders;
-  // while (current->next != NULL) {
-  //     current = current->next;
-  //   }
+  Order * current = *orders;
+  while (current->next != NULL) {
+      current = current->next;
+    }
 
-  //   /* now we can add a new variable */
+    /* now we can add a new variable */
 
-  //   current->next = (Order *) malloc(sizeof(order));
-  //   current->next->menu_item = order->menu_item;
-  //   current->next->customer_id = order->customer_id;
-  //   current->next->order_number = order->order_number;
-  //   current->next->next = NULL;
+    current->next = (Order *) malloc(sizeof(order));
+    current->next->menu_item = order->menu_item;
+    current->next->customer_id = order->customer_id;
+    current->next->order_number = order->order_number;
+    current->next->next = NULL;
   }
 
 

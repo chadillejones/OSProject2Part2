@@ -83,20 +83,20 @@ int main() {
       j++;
     }
   
-    // for (i = 0; i < NUM_COOKS; i++){
-    //   cook[i] = j;
-    //   pthread_create(&(bcb_cooks[i]), NULL, BENSCHILLIBOWLCook, &(cook[i]));
-    //   j++;
-    // }
+    for (i = 0; i < NUM_COOKS; i++){
+      cook[i] = j;
+      pthread_create(&(bcb_cooks[i]), NULL, BENSCHILLIBOWLCook, &(cook[i]));
+      j++;
+    }
   
-    // for (i = 0; i < NUM_CUSTOMERS; i++){
-    //   pthread_join(bcb_customers[i], NULL);
-    // }
+    for (i = 0; i < NUM_CUSTOMERS; i++){
+      pthread_join(bcb_customers[i], NULL);
+    }
   
-    // for (i = 0; i < NUM_COOKS; i++){
-    //   pthread_join(bcb_cooks[i], NULL);
-    // }
+    for (i = 0; i < NUM_COOKS; i++){
+      pthread_join(bcb_cooks[i], NULL);
+    }
 
-    // CloseRestaurant(bcb);
+    CloseRestaurant(bcb);
     return 0;
 }
